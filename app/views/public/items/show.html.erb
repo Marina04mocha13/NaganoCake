@@ -1,0 +1,29 @@
+<div class="container px-5 px-sm-0 mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'genre_search', genres: @genres %>
+    </div>
+    <div class="col-4">
+      <%= image_tag @item.get_item_image, size: "300x200" %>
+    </div>
+    <div class="col">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td><%= @item.name %></td>
+          </tr>
+          <tr>
+            <td><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <td>¥ <%= @item.add_tax_price.to_s(:delimited) %>(税込み)</td>
+          </tr>
+          <tr>
+            <td>個数選択</td>
+            <td>カートに入れる</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
