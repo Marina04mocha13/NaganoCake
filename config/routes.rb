@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
   }
 
+  root to: "homes#top"
+  get "mypage", to: 'customers#show'
+  get "home/about"=> "homes#about", as: "about"
 
   scope module: :public do
-    root to: "homes#top"
-    get "home/about"=> "homes#about", as: "about"
-    get "mypage", to: 'customers#show'
   end
   namespace :admin do
-    get "admin/top"
+    get "homes/top", as: "top"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
