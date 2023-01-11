@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   sessions: 'customer/sessions'
   }
 
-  devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
   root to: "homes#top"
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index,:show]
   end
   namespace :admin do
-    get "homes/top", as: "top"
+    root to: "homes#top"
     resources :customers, only: [:index]
     resources :items
     resources :genres, only: [:index, :create, :edit, :update]
