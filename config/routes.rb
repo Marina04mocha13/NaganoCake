@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items, only: [:index,:show]
+    delete "cart_items/destroy_all", to: 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :update, :destroy, :create]
   end
   namespace :admin do
     get "homes/top", as: "top"

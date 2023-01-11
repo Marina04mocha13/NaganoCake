@@ -13,13 +13,13 @@
   </head>
 
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-dark">
+    <nav class="navbar navbar-expand-sm navbar-light border-bottom border-dark">
         <a class="navbar-brand" href="/"><span>ながのCAKE</span></a>
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
-        <!--  <span class="navbar-toggler-icon"></span>-->
-        <!--</button>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <!--<div class="navbar-collapse collapse" id="navbarNavDropdown" style="">-->
+        <div class="navbar-collapse collapse" id="navbarNavDropdown" style="">
           <ul class="navbar-nav ml-auto">
             <% if admin_signed_in? %>
               <li class="nav-item mr-3">
@@ -38,14 +38,14 @@
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border border-secondary rounded' %>
               </li>
             <% elsif customer_signed_in? %>
-              <li class="nav-item mr-3">
-                <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark border border-secondary rounded' %>
+              <li class="nav-item mr-3  border border-secondary rounded">
+                <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item mr-3">
                 <%= link_to "商品一覧", items_path, class: 'nav-link text-dark border border-secondary rounded' %>
               </li>
               <li class="nav-item mr-3">
-                <%= link_to "カート", root_path, class: 'nav-link text-dark border border-secondary rounded' %>
+                <%= link_to "カート", cart_items_path, class: 'nav-link text-dark border border-secondary rounded' %>
               </li>
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark border border-secondary rounded' %>

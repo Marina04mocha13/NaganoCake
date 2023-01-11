@@ -1,4 +1,4 @@
-<div class="container px-5 px-sm-0">
+<div class="container-fluid m-md-5">
   <div class="row">
     <div class="col-md-3">
       <%= render 'genre_search', genres: @genres %>
@@ -11,8 +11,20 @@
             <div class="col-3">
               <table class="table">
                 <tbody>
-                  <tr><td><%= image_tag item.get_item_image, size: "150x100" %></td></tr>
-                  <tr><td><%= link_to item.name, item_path(item.id) %></td></tr>
+                  <tr>
+                    <td>
+                      <%= link_to item_path(item.id) do %>
+                        <%= image_tag item.get_item_image, class: "img-fluid" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%= link_to item_path(item.id), class: "link-dark" do %>
+                        <%= item.name %>
+                      <% end %>
+                    </td>
+                  </tr>
                   <tr><td>¥<%= item.price %></td></tr>
                 </tbody>
               </table>
@@ -20,7 +32,9 @@
           <% end %>
         <% end %>
       </div>
-      <%= will_paginate @items %>
+
+        <%= will_paginate @items, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+
     </div>
   </div>
 </div>

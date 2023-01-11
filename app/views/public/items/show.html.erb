@@ -1,29 +1,42 @@
-<div class="container px-5 px-sm-0 mt-4">
+<div class="container-fluid m-sm-5">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <%= render 'genre_search', genres: @genres %>
     </div>
-    <div class="col-4">
-      <%= image_tag @item.get_item_image, size: "300x200" %>
+    <div class="col-sm-4">
+      <%= image_tag @item.get_item_image, class: "img-fluid" %>
     </div>
-    <div class="col">
-      <table class="table table-borderless">
-        <tbody>
-          <tr>
-            <td><%= @item.name %></td>
-          </tr>
-          <tr>
-            <td><%= @item.introduction %></td>
-          </tr>
-          <tr>
-            <td>¥ <%= @item.add_tax_price.to_s(:delimited) %>(税込み)</td>
-          </tr>
-          <tr>
-            <td>個数選択</td>
-            <td>カートに入れる</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-sm-4">
+      <%= form_with model: @cart_item do |f| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td colspan="2"><%= @item.name %></td>
+            </tr>
+            <tr>
+              <td colspan="2"><%= @item.introduction %></td>
+            </tr>
+            <tr>
+              <td>
+                ¥ <%= @item.add_tax_price.to_s(:delimited) %><small class="text-muted"> (税込)</small>
+              </td>
+            </tr>
+            <tr>
+              <% if flash.now[:notice] %>
+                 <p id="notice">
+                     <%= flash.now[:notice] %>
+                 </p>
+               <% end %>
+              <% if customer_signed_in? %>
+                <%= f.hidden_field :customer_id, :value => current_customer.id %>
+              <% end %>
+              <%= f.hidden_field :item_id, value: @item.id %>
+              <td><%= f.select :amount, [1,2,3,4,5,6,7,8,9,10], {include_blank: '個数選択'}, required: true %>&emsp;</td>
+              <td><%= f.submit "カートに入れる", class: "btn btn-success" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>
