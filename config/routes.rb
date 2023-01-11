@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :update, :destroy, :create]
   end
   namespace :admin do
-    get "homes/top", as: "top"
+    root to: "homes#top"
     resources :customers, only: [:index]
     resources :items
     resources :genres, only: [:index, :create, :edit, :update]
