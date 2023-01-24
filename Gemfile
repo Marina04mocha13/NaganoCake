@@ -59,3 +59,7 @@ gem 'devise'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
+
+gem 'enum_help'
+
+gem 'pry-byebug', group: :development

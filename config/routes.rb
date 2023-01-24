@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   sessions: 'customer/sessions'
   }
 
-  devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
   root to: "homes#top"
@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     resources :items, only: [:index,:show]
     delete "cart_items/destroy_all", to: 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :create]
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post :confirm
+        get :complete
+      end
+    end
     resources :addresses, only: [:index, :edit, :update, :destroy, :create]
   end
   namespace :admin do
@@ -27,6 +33,8 @@ Rails.application.routes.draw do
     resources :customers, only: [:index]
     resources :items
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :orders, only: [:index, :show, :update]
+    resources :order_details, only: [:update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

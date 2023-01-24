@@ -1,0 +1,86 @@
+ <% if flash.now[:notice] %>
+   <p id="notice">
+       <%= flash.now[:notice] %>
+   </p>
+<% end %>
+<h1>注文履歴詳細</h1>
+<div class="container">
+  <div class="row">
+    <%= form_with model: [:admin, @order] do |f| %>
+      <table class="table table-hover table-inverse">
+        <tbody>
+          <tr>
+            <th>購入者</th>
+            <td><%= @order.customer.name_display %></td>
+          </tr>
+          <tr>
+            <th>注文日</th>
+            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <th>配送先</th>
+            <td><%= @order.address_display %></td>
+          </tr>
+          <tr>
+            <th>支払方法</th>
+            <td><%= @order.payment_method_i18n %></td>
+          </tr>
+          <tr>
+            <th>注文ステータス</th>
+            <td>
+              <%= f.select :status, Order.statuses.keys.map { |k| [I18n.t("enums.order.status.#{k}"), k ]} %>
+              <%= f.submit "更新", class: "btn btn-success" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th nowrap>単価<small class="text-muted"> (税込)</small></th>
+            <th nowrap>数量</th>
+            <th nowrap>小計</th>
+            <th>製作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+            <tr>
+              <td nowrap><%= order_detail.item.name %></td>
+              <td><%= order_detail.item.add_tax_price %></td>
+              <td><%= order_detail.amount %></td>
+              <td><%= order_detail.total_price %></td>
+              <td>
+                <%= form_for (order_detail), url: admin_order_detail_path(order_detail), class: "form-inline" do |f| %>
+                  <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+                  <%= f.submit "更新", class: "btn btn-success" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table table-borderless">
+        <tr>
+          <th>商品合計</th>
+          <td><%= (@order.total_payment - @order.shipping_cost).to_s %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @order.shipping_cost %></td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= @order.total_payment %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
