@@ -31,7 +31,7 @@
           <tr>
             <td><%= image_tag cart_item.item.get_item_image, size: "60x40" %></td>
             <td nowrap><%= cart_item.item.name %></td>
-            <td>¥<%= cart_item.item.price %></td>
+            <td>¥<%= cart_item.item.add_tax_price %></td>
             <td nowrap>
               <%= form_for(cart_item, html: { class: "form-inline" }) do |f| %>
                 <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10], { selected: cart_item.amount }, { class: 'form-control' , required: true } %>
