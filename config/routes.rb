@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       end
     end
     resources :addresses, only: [:index, :edit, :update, :destroy, :create]
+    get "search_genre" => "items#search_genre"
   end
   namespace :admin do
     root to: "homes#top"
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :orders, only: [:index, :show, :update]
     resources :order_details, only: [:update]
-    get "search" => "items#search"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

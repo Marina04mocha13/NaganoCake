@@ -1,4 +1,9 @@
 <div class="container-fluid m-sm-5 p-3">
+  <% if flash.now[:notice] %>
+       <p id="notice">
+           <%= flash.now[:notice] %>
+       </p>
+  <% end %>
   <h1>配送先登録/一覧</h1>
   <%= form_with model: @address do |f| %>
     <div class="form-group row">
