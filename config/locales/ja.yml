@@ -3,6 +3,65 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
 
+  activerecord:
+    models:
+      item: 商品
+    attributes:
+      item:
+        image: 商品画像
+        name: 商品名
+        introduction: 商品の説明
+        price: 価格
+
+      customer:
+        last_name: "姓"
+        first_name: "名"
+        last_name_kana: "姓(カナ)"
+        first_name_kana: "名(カナ)"
+        postal_code: "郵便番号"
+        address: "住所"
+        telephone_number: "電話番号"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード(確認用)"
+
+    errors:
+      messages:
+        invalid: "が正しくありません。"
+        blank: "を入力してください。"
+        too_short: "は%{count}文字以上で入力してください。"
+
+  devise:
+    confirmations:
+      confirmed: メールアドレスが確認できました。
+    failure:
+      already_authenticated: すでにログインしています。
+      inactive: アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。
+      invalid: "%{authentication_keys}またはパスワードが違います。"
+      last_attempt: もう一回誤るとアカウントがロックされます。
+      locked: アカウントはロックされています。
+      not_found_in_database: "%{authentication_keys}またはパスワードが違います。"
+      timeout: セッションがタイムアウトしました。もう一度ログインしてください。
+      unauthenticated: ログインもしくはアカウント登録してください。
+      unconfirmed: メールアドレスの本人確認が必要です。
+
+    registrations:
+      new:
+        sign_up: アカウント登録
+      signed_up: アカウント登録が完了しました。
+      signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
+      signed_up_but_locked: アカウントがロックされているためログインできません。
+      signed_up_but_unconfirmed: 本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。
+      update_needs_confirmation: アカウント情報を変更しました。変更されたメールアドレスの本人確認のため、本人確認用メールより確認処理をおこなってください。
+      updated: アカウント情報を変更しました。
+      updated_but_not_signed_in: あなたのアカウントは正常に更新されましたが、パスワードが変更されたため、再度ログインしてください。
+    sessions:
+      already_signed_out: 既にログアウト済みです。
+      new:
+        sign_in: ログイン
+      signed_in: ログインしました。
+      signed_out: ログアウトしました。
+
   enums:
     order:
       payment_method:

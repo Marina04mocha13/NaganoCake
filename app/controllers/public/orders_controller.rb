@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
     @total = @order_items.inject(0) { |sum, item| sum + item.total_price }
 
     @order = Order.new(order_params)
+    @order.status = "payment_waiting"
     address_option = params[:order][:address_option].to_i
     if address_option == 0
       @order.postal_code = current_customer.postal_code
