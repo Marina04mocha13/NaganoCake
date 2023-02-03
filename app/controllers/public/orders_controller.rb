@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :confirm_cart_item, only: [:new, :confirm, :complete]
+
   def new
     @order = Order.new
   end
@@ -63,5 +65,9 @@ class Public::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
+  end
+
+  def confirm_cart_item
+    redirect_to items_path unless current_customer.cart_items.exists?
   end
 end
