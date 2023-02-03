@@ -1,5 +1,5 @@
 class Public::CartItemsController < ApplicationController
-  before_action :confirm_cart_item, only: [:index]
+
   def index
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.total_price }
@@ -42,9 +42,4 @@ class Public::CartItemsController < ApplicationController
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :customer_id, :amount)
   end
-
-  def confirm_cart_item
-    redirect_to items_path unless current_customer.cart_items.exists?
-  end
-
 end
