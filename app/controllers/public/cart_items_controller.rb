@@ -1,5 +1,5 @@
 class Public::CartItemsController < ApplicationController
-  before_action :confirm_cart_item, only: [:index]
+
   def index
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.total_price }
