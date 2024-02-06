@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     resources :customers, only: [:index]
     resources :items
+    get "search_items" => "admin/items#search"
     resources :genres, only: [:index, :create, :edit, :update]
     resources :orders, only: [:index, :show, :update]
     resources :order_details, only: [:update]
